@@ -1,0 +1,10 @@
+{
+  "name": "titote",
+  "version": "1.0.0",
+  "description": "Claude Code plugin for Titote - Next.js 14+ frontend project with App Router, Tailwind, and modern tooling",
+  "author": {
+    "name": "Rulo",
+    "email": "drew.lizcano@gmail.com"
+  },
+  "keywords": ["nextjs", "react", "typescript", "tailwind", "frontend", "app-router"]
+}

@@ -11,7 +11,7 @@ export function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 80);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -19,68 +19,94 @@ export function Header() {
 
   const navLinks = [
     { href: '#inicio', label: t.nav.home },
-    { href: '#platos', label: t.nav.menu },
+    { href: '/menu', label: t.nav.menu },
     { href: '#nosotros', label: t.nav.about },
     { href: '#ubicacion', label: t.nav.location },
   ];
 
   return (
     <header
-      className={`fixed top-0 right-0 left-0 z-50 border-b transition-all duration-500 ease-out ${
-        isScrolled
-          ? 'border-titote-red-dark/10 bg-white/95 shadow-lg shadow-black/5 backdrop-blur-lg'
-          : 'bg-titote-cream border-transparent'
+      className={`fixed top-0 right-0 left-0 z-50 transition-all duration-500 ease-out ${
+        isScrolled ? 'bg-[#f5f1e6]/95 shadow-lg shadow-black/5 backdrop-blur-xl' : 'bg-transparent'
       }`}
     >
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-[100px]">
+      {/* Subtle gradient overlay when transparent for better text readability */}
+      <div
+        className={`pointer-events-none absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-transparent transition-opacity duration-500 ${
+          isScrolled ? 'opacity-0' : 'opacity-100'
+        }`}
+      />
+
+      <div className="relative mx-auto max-w-7xl px-6 sm:px-8 lg:px-[100px]">
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
           <a href="#inicio" className="group flex items-center gap-3">
             <Image
               src="/images/titote-logo.png"
               alt="Titoté Local Food & Fusion"
-              width={120}
-              height={92}
-              className="h-12 w-auto transition-transform duration-300 group-hover:scale-105"
+              width={160}
+              height={123}
+              className="h-16 w-auto transition-all duration-500 group-hover:scale-105"
               priority
             />
           </a>
 
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-8 md:flex">
-            {navLinks.map((link, index) => (
+            {navLinks.map(link => (
               <a
                 key={link.href}
                 href={link.href}
-                className={`hover:text-titote-red text-sm font-medium transition-all duration-300 ${
-                  index === 0 ? 'text-titote-red-dark font-semibold' : 'text-titote-brown'
+                className={`relative text-sm font-medium tracking-wide transition-all duration-300 ${
+                  isScrolled
+                    ? 'text-[#5c4033] hover:text-[#a51508]'
+                    : 'text-white/90 hover:text-white'
                 }`}
               >
                 {link.label}
+                <span
+                  className={`absolute -bottom-1 left-0 h-0.5 w-0 transition-all duration-300 group-hover:w-full ${
+                    isScrolled ? 'bg-[#a51508]' : 'bg-[#c9a227]'
+                  }`}
+                />
               </a>
             ))}
           </nav>
 
           {/* Right side: Language toggle + CTA */}
-          <div className="hidden items-center gap-4 md:flex">
+          <div className="hidden items-center gap-6 md:flex">
             {/* Language Toggle */}
             <button
               onClick={toggleLocale}
-              className="text-titote-brown hover:text-titote-red flex items-center gap-1 text-sm font-medium transition-colors"
+              className={`flex items-center gap-2 text-sm font-medium transition-all duration-300 ${
+                isScrolled ? 'text-[#5c4033]' : 'text-white/80'
+              }`}
               aria-label="Toggle language"
             >
               <span
-                className={
-                  locale === 'es' ? 'text-titote-red-dark font-semibold' : 'text-titote-brown/60'
-                }
+                className={`transition-all duration-300 ${
+                  locale === 'es'
+                    ? isScrolled
+                      ? 'font-semibold text-[#a51508]'
+                      : 'font-semibold text-white'
+                    : isScrolled
+                      ? 'text-[#5c4033]/50'
+                      : 'text-white/50'
+                }`}
               >
                 ES
               </span>
-              <span className="text-titote-brown/30">|</span>
+              <span className={isScrolled ? 'text-[#5c4033]/30' : 'text-white/30'}>|</span>
               <span
-                className={
-                  locale === 'en' ? 'text-titote-red-dark font-semibold' : 'text-titote-brown/60'
-                }
+                className={`transition-all duration-300 ${
+                  locale === 'en'
+                    ? isScrolled
+                      ? 'font-semibold text-[#a51508]'
+                      : 'font-semibold text-white'
+                    : isScrolled
+                      ? 'text-[#5c4033]/50'
+                      : 'text-white/50'
+                }`}
               >
                 EN
               </span>
@@ -89,7 +115,11 @@ export function Header() {
             {/* CTA Button */}
             <a
               href="#reservar"
-              className="from-titote-red to-titote-red-light shadow-red hover:shadow-red-lg rounded-3xl bg-gradient-to-r px-7 py-3 text-sm font-semibold text-white transition-all duration-300 hover:scale-[1.02]"
+              className={`rounded-full px-7 py-2.5 text-sm font-semibold transition-all duration-500 hover:scale-[1.02] ${
+                isScrolled
+                  ? 'bg-[#a51508] text-white shadow-lg hover:bg-[#8a1107] hover:shadow-xl'
+                  : 'border-2 border-white/80 text-white backdrop-blur-sm hover:bg-white hover:text-[#a51508]'
+              }`}
             >
               {t.nav.reserve}
             </a>
@@ -98,7 +128,9 @@ export function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-titote-brown hover:bg-titote-cream rounded-xl p-2 transition-all duration-300 md:hidden"
+            className={`rounded-xl p-2 transition-all duration-300 md:hidden ${
+              isScrolled ? 'text-[#5c4033] hover:bg-[#5c4033]/10' : 'text-white hover:bg-white/10'
+            }`}
             aria-label="Toggle menu"
           >
             <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -127,26 +159,26 @@ export function Header() {
             isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
           }`}
         >
-          <div className="border-titote-red/10 mt-2 rounded-2xl border bg-white p-4 shadow-xl">
+          <div className="mt-2 rounded-2xl border border-white/10 bg-[#1a1a1a]/90 p-4 shadow-2xl backdrop-blur-xl">
             <nav className="flex flex-col gap-1">
               {navLinks.map(link => (
                 <a
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-titote-brown hover:text-titote-red hover:bg-titote-cream rounded-xl px-4 py-3 transition-all duration-200"
+                  className="rounded-xl px-4 py-3 text-white/90 transition-all duration-200 hover:bg-white/10 hover:text-white"
                 >
                   {link.label}
                 </a>
               ))}
-              <hr className="border-titote-cream my-3" />
+              <hr className="my-3 border-white/10" />
               <div className="flex items-center justify-between px-4 py-2">
-                <span className="text-titote-brown/60 text-sm">
+                <span className="text-sm text-white/60">
                   {locale === 'es' ? 'Idioma' : 'Language'}
                 </span>
                 <button
                   onClick={toggleLocale}
-                  className="bg-titote-cream text-titote-brown hover:bg-titote-red flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors hover:text-white"
+                  className="flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/20"
                 >
                   <span>{locale === 'es' ? 'ES' : 'EN'}</span>
                 </button>
@@ -154,7 +186,7 @@ export function Header() {
               <a
                 href="#reservar"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="from-titote-red to-titote-red-light shadow-red mt-2 rounded-2xl bg-gradient-to-r px-6 py-3 text-center font-semibold text-white"
+                className="mt-2 rounded-2xl bg-[#a51508] px-6 py-3 text-center font-semibold text-white shadow-lg transition-all hover:bg-[#8a1107]"
               >
                 {t.nav.reserve}
               </a>

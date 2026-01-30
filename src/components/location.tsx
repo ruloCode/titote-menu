@@ -64,9 +64,9 @@ export function Location() {
   const [sectionRef, isInView] = useInView<HTMLElement>({ threshold: 0.1 });
 
   return (
-    <section id="ubicacion" ref={sectionRef} className="bg-titote-cream py-[100px]">
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-[100px]">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+    <section id="ubicacion" ref={sectionRef} className="bg-titote-cream py-12 md:py-[100px]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-[100px]">
+        <div className="grid items-center gap-8 md:gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Content */}
           <div
             className={`transition-all duration-700 ${

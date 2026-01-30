@@ -31,29 +31,46 @@ function PhoneIcon({ className }: { className?: string }) {
 }
 
 export function CTASection() {
-  const { locale } = useLanguage();
+  const { t } = useLanguage();
 
-  const whatsappMessage = encodeURIComponent(
-    locale === 'es'
-      ? 'Hola! Me gustaría hacer una reserva en Titoté.'
-      : 'Hi! I would like to make a reservation at Titoté.'
-  );
+  const whatsappMessage = encodeURIComponent(t.whatsapp.message);
 
   return (
-    <section id="reservar" className="bg-titote-red-dark py-[100px]">
-      <div className="mx-auto max-w-4xl px-6 text-center sm:px-8">
+    <section
+      id="reservar"
+      className="relative overflow-hidden bg-[#1a0a08] py-12 sm:py-24 lg:py-32"
+    >
+      {/* Decorative background elements */}
+      <div className="pointer-events-none absolute inset-0">
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#a51508]/20 via-transparent to-[#c9a227]/10" />
+
+        {/* Top decorative line */}
+        <div className="absolute top-0 left-1/2 h-px w-1/2 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#c9a227]/50 to-transparent" />
+
+        {/* Corner accents */}
+        <div className="absolute top-8 left-8 h-16 w-16 border-t-2 border-l-2 border-[#c9a227]/30" />
+        <div className="absolute right-8 bottom-8 h-16 w-16 border-r-2 border-b-2 border-[#c9a227]/30" />
+      </div>
+
+      <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-8">
+        {/* Decorative label */}
+        <div className="mb-6 inline-flex items-center gap-3 md:mb-8">
+          <span className="h-px w-8 bg-[#c9a227]" />
+          <span className="text-xs font-semibold tracking-[0.2em] text-[#c9a227] uppercase">
+            {t.cta.label}
+          </span>
+          <span className="h-px w-8 bg-[#c9a227]" />
+        </div>
+
         {/* Title */}
-        <h2 className="text-titote-cream mb-6 font-serif text-[42px] leading-tight font-bold sm:text-[52px]">
-          {locale === 'es'
-            ? '¿Listo para una experiencia única?'
-            : 'Ready for a unique experience?'}
+        <h2 className="mb-6 font-serif text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">
+          {t.cta.title}
         </h2>
 
         {/* Subtitle */}
-        <p className="mx-auto mb-12 max-w-2xl text-lg leading-relaxed text-white/70 sm:text-xl">
-          {locale === 'es'
-            ? 'Reserva tu mesa ahora y descubre la fusión perfecta entre el Caribe y Oriente'
-            : 'Book your table now and discover the perfect fusion between the Caribbean and the Orient'}
+        <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-[#f5f1e6]/80 sm:text-xl md:mb-12">
+          {t.cta.subtitle}
         </p>
 
         {/* Buttons */}
@@ -63,20 +80,27 @@ export function CTASection() {
             href={`https://wa.me/573238091748?text=${whatsappMessage}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="from-titote-red to-titote-red-light shadow-red-lg hover:shadow-red-xl inline-flex w-full items-center justify-center gap-3 rounded-[28px] bg-gradient-to-r px-10 py-5 font-semibold text-white transition-all duration-300 hover:scale-[1.02] sm:w-auto"
+            className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#c9a227] px-10 py-5 font-semibold text-[#1a0a08] shadow-lg shadow-[#c9a227]/25 transition-all duration-300 hover:scale-[1.02] hover:bg-[#d4af37] hover:shadow-xl hover:shadow-[#c9a227]/30 sm:w-auto"
           >
-            <WhatsAppIcon className="h-6 w-6" />
-            {locale === 'es' ? 'Reservar por WhatsApp' : 'Book via WhatsApp'}
+            <WhatsAppIcon className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
+            {t.cta.whatsappButton}
           </a>
 
           {/* Call Button */}
           <a
             href="tel:+573238091748"
-            className="border-titote-cream text-titote-cream hover:bg-titote-cream hover:text-titote-red-dark inline-flex w-full items-center justify-center gap-3 rounded-[28px] border-2 px-10 py-5 font-semibold transition-all duration-300 sm:w-auto"
+            className="inline-flex w-full items-center justify-center gap-3 rounded-full border-2 border-[#f5f1e6]/40 px-10 py-5 font-semibold text-[#f5f1e6] transition-all duration-300 hover:border-[#f5f1e6] hover:bg-[#f5f1e6] hover:text-[#1a0a08] sm:w-auto"
           >
             <PhoneIcon className="h-5 w-5" />
-            {locale === 'es' ? 'Llamar Ahora' : 'Call Now'}
+            {t.cta.callButton}
           </a>
+        </div>
+
+        {/* Bottom decorative element */}
+        <div className="mt-10 flex items-center justify-center gap-4 md:mt-16">
+          <span className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a227]/50" />
+          <span className="text-2xl text-[#c9a227]/60">✦</span>
+          <span className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a227]/50" />
         </div>
       </div>
     </section>

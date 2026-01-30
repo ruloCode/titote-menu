@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useLanguage } from '@/context/language-context';
 
 // Map Pin Icon
@@ -23,44 +24,46 @@ function MapPinIcon({ className }: { className?: string }) {
 }
 
 export function HeroContent() {
-  const { t, locale } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <div className="text-center lg:text-left">
       {/* Location badge */}
       <div className="animate-reveal-bottom stagger-premium-1">
-        <div className="bg-titote-red-dark/8 border-titote-red-dark/15 hover:bg-titote-red-dark/12 mb-8 inline-flex items-center gap-2 rounded-full border px-5 py-2.5 transition-colors duration-300">
-          <MapPinIcon className="text-titote-red-dark h-4 w-4" />
-          <span className="text-titote-red-dark text-sm font-medium">Getsemaní, Cartagena</span>
+        <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2.5 backdrop-blur-sm transition-colors duration-300 hover:bg-white/20 md:mb-8">
+          <MapPinIcon className="text-titote-gold h-4 w-4" />
+          <span className="text-sm font-medium text-white">Getsemaní, Cartagena</span>
         </div>
       </div>
 
       {/* Main heading with premium animation */}
       <div className="animate-reveal-bottom stagger-premium-2">
-        <h1 className="text-titote-red-dark mb-6 font-serif text-[48px] leading-[1.1] font-bold sm:text-[56px] lg:text-[64px]">
-          Sabores Locales
+        <h1 className="mb-4 font-serif text-[40px] leading-[1.1] font-bold text-white drop-shadow-lg sm:text-[56px] md:mb-6 lg:text-[72px]">
+          {t.hero.title}
           <br />
-          con <span className="text-shimmer">Alma Oriental</span>
+          con{' '}
+          <span className="text-titote-gold drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]">
+            {t.hero.titleHighlight}
+          </span>
         </h1>
       </div>
 
       {/* Subtitle with blur reveal */}
-      <p className="text-titote-brown/85 animate-reveal-bottom stagger-premium-3 mx-auto mb-10 max-w-[440px] text-[17px] leading-[1.8] lg:mx-0">
+      <p className="animate-reveal-bottom stagger-premium-3 mx-auto mb-6 max-w-[440px] text-[16px] leading-[1.7] text-white/90 drop-shadow-md md:mb-10 md:text-[18px] md:leading-[1.8] lg:mx-0">
         {t.hero.subtitle}
       </p>
 
       {/* CTAs with premium hover */}
-      <div className="animate-reveal-bottom stagger-premium-4 mb-10 flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start">
-        <a
-          href="#platos"
-          className="group from-titote-red to-titote-red-light shadow-red hover:shadow-red-xl relative w-full overflow-hidden rounded-[28px] bg-gradient-to-r px-9 py-4 text-center font-semibold text-white transition-all duration-500 hover:scale-[1.03] sm:w-auto"
+      <div className="animate-reveal-bottom stagger-premium-4 mb-6 flex flex-col items-center justify-center gap-3 sm:flex-row md:mb-10 md:gap-4 lg:justify-start">
+        <Link
+          href="/menu"
+          className="group relative w-full overflow-hidden rounded-[28px] bg-[#a51508] px-7 py-3.5 text-center font-semibold text-white shadow-lg transition-all duration-500 hover:scale-[1.03] hover:bg-[#8a1107] hover:shadow-xl sm:w-auto md:px-9 md:py-4"
         >
-          <span className="relative z-10">{locale === 'es' ? 'Ver Menú' : 'View Menu'}</span>
-          <div className="from-titote-red-light to-titote-red absolute inset-0 bg-gradient-to-r opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-        </a>
+          <span className="relative z-10">{t.hero.ctaSecondary}</span>
+        </Link>
         <a
           href="#reservar"
-          className="border-titote-red-dark text-titote-red-dark hover:bg-titote-red-dark w-full rounded-[28px] border-2 px-9 py-4 text-center font-semibold transition-all duration-500 hover:scale-[1.02] hover:text-white hover:shadow-lg sm:w-auto"
+          className="w-full rounded-[28px] border-2 border-white px-7 py-3.5 text-center font-semibold text-white backdrop-blur-sm transition-all duration-500 hover:scale-[1.02] hover:bg-white hover:text-[#a51508] hover:shadow-lg sm:w-auto md:px-9 md:py-4"
         >
           {t.nav.reserve}
         </a>
@@ -68,11 +71,11 @@ export function HeroContent() {
 
       {/* Est. badge with glow */}
       <div className="animate-reveal-bottom stagger-premium-5 flex items-center justify-center gap-3 lg:justify-start">
-        <div className="via-titote-gold h-[2px] w-12 rounded-full bg-gradient-to-r from-transparent to-transparent" />
-        <span className="text-titote-terracotta text-[11px] font-semibold tracking-[3px] uppercase">
+        <div className="bg-titote-gold/60 h-[2px] w-12 rounded-full" />
+        <span className="text-titote-gold text-[11px] font-semibold tracking-[3px] uppercase">
           Est. 2019
         </span>
-        <div className="via-titote-gold h-[2px] w-12 rounded-full bg-gradient-to-r from-transparent to-transparent" />
+        <div className="bg-titote-gold/60 h-[2px] w-12 rounded-full" />
       </div>
     </div>
   );

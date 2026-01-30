@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useLanguage } from '@/context/language-context';
 import { useInView } from '@/hooks/use-in-view';
 
@@ -64,24 +65,15 @@ const featuredDishes: Dish[] = [
   },
 ];
 
-function formatPrice(price: number): string {
-  return new Intl.NumberFormat('es-CO', {
-    style: 'currency',
-    currency: 'COP',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(price);
-}
-
 export function FeaturedDishes() {
   const { locale } = useLanguage();
   const [sectionRef, isInView] = useInView<HTMLElement>({ threshold: 0.1 });
 
   return (
-    <section id="platos" ref={sectionRef} className="bg-white py-[100px]">
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-[100px]">
+    <section id="platos" ref={sectionRef} className="hidden bg-white py-12 md:block md:py-[100px]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-[100px]">
         {/* Header */}
-        <div className="mb-16 text-center">
+        <div className="mb-8 text-center md:mb-16">
           <span className="text-titote-gold mb-4 block text-sm font-semibold tracking-[3px] uppercase">
             {locale === 'es' ? 'NUESTRA CARTA' : 'OUR MENU'}
           </span>
@@ -129,12 +121,9 @@ export function FeaturedDishes() {
                 <h3 className="text-titote-red-dark group-hover:text-titote-red mb-3 font-serif text-[24px] font-semibold transition-colors duration-300 lg:text-[26px]">
                   {dish.name[locale]}
                 </h3>
-                <p className="text-titote-brown/70 mb-4 min-h-[48px] text-sm leading-relaxed lg:text-base">
+                <p className="text-titote-brown/70 min-h-[48px] text-sm leading-relaxed lg:text-base">
                   {dish.description[locale]}
                 </p>
-                <span className="text-titote-gold group-hover:text-shimmer inline-block text-[20px] font-bold transition-all duration-300 group-hover:scale-110">
-                  {formatPrice(dish.price)}
-                </span>
               </div>
             </div>
           ))}
@@ -142,13 +131,13 @@ export function FeaturedDishes() {
 
         {/* CTA */}
         <div className="mt-14 text-center">
-          <a
-            href="#menu"
-            className="border-titote-red-dark text-titote-red-dark hover:bg-titote-red-dark group inline-flex items-center gap-3 rounded-[28px] border-2 px-10 py-4 font-semibold transition-all duration-300 hover:text-white"
+          <Link
+            href="/menu"
+            className="group inline-flex items-center gap-3 rounded-[28px] border-2 border-[#a51508] bg-transparent px-10 py-4 font-semibold text-[#a51508] transition-all duration-300 hover:bg-[#a51508] hover:text-white"
           >
             {locale === 'es' ? 'Ver Menú Completo' : 'View Full Menu'}
             <ArrowRightIcon className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

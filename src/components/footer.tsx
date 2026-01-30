@@ -19,30 +19,22 @@ function FacebookIcon({ className }: { className?: string }) {
   );
 }
 
-function StarIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-  );
-}
-
 export function Footer() {
-  const { locale } = useLanguage();
+  const { t, locale } = useLanguage();
   const currentYear = new Date().getFullYear();
 
   const navLinks = [
-    { href: '#inicio', label: locale === 'es' ? 'Inicio' : 'Home' },
-    { href: '#platos', label: locale === 'es' ? 'Menú' : 'Menu' },
-    { href: '#nosotros', label: locale === 'es' ? 'Nosotros' : 'About' },
-    { href: '#reservar', label: locale === 'es' ? 'Reservas' : 'Reservations' },
+    { href: '#inicio', label: t.nav.home },
+    { href: '/menu', label: t.nav.menu },
+    { href: '#nosotros', label: t.nav.about },
+    { href: '#reservar', label: t.nav.reserve },
   ];
 
   const hours = [
-    { day: locale === 'es' ? 'Martes - Jueves' : 'Tuesday - Thursday', time: '12:00 - 22:00' },
-    { day: locale === 'es' ? 'Viernes - Sábado' : 'Friday - Saturday', time: '12:00 - 23:00' },
-    { day: locale === 'es' ? 'Domingo' : 'Sunday', time: '12:00 - 21:00' },
-    { day: locale === 'es' ? 'Lunes' : 'Monday', time: locale === 'es' ? 'Cerrado' : 'Closed' },
+    { day: t.footer.tuesdayThursday, time: '12:00 - 22:00' },
+    { day: t.footer.fridaySaturday, time: '12:00 - 23:00' },
+    { day: t.footer.sunday, time: '12:00 - 21:00' },
+    { day: t.footer.monday, time: t.footer.closed },
   ];
 
   return (
@@ -53,7 +45,7 @@ export function Footer() {
           {/* Column 1: Brand */}
           <div className="col-span-2 md:col-span-1">
             <h3 className="text-titote-cream mb-2 font-serif text-[32px] font-bold">Titoté</h3>
-            <p className="mb-4 text-sm text-white/50">Local Food & Fusion</p>
+            <p className="mb-4 text-sm text-white/50">{t.footer.slogan}</p>
 
             {/* Decorative line */}
             <div className="bg-titote-gold mb-4 h-[2px] w-10 rounded-full" />
@@ -68,7 +60,7 @@ export function Footer() {
           {/* Column 2: Navigation */}
           <div>
             <h4 className="text-titote-gold mb-6 text-xs font-semibold tracking-[2px] uppercase">
-              {locale === 'es' ? 'NAVEGACIÓN' : 'NAVIGATION'}
+              {t.footer.navigation}
             </h4>
             <ul className="space-y-3">
               {navLinks.map(link => (
@@ -87,7 +79,7 @@ export function Footer() {
           {/* Column 3: Hours */}
           <div>
             <h4 className="text-titote-gold mb-6 text-xs font-semibold tracking-[2px] uppercase">
-              {locale === 'es' ? 'HORARIOS' : 'HOURS'}
+              {t.footer.hours}
             </h4>
             <ul className="space-y-3">
               {hours.map(item => (
@@ -103,7 +95,7 @@ export function Footer() {
           {/* Column 4: Social */}
           <div>
             <h4 className="text-titote-gold mb-6 text-xs font-semibold tracking-[2px] uppercase">
-              {locale === 'es' ? 'SÍGUENOS' : 'FOLLOW US'}
+              {t.footer.followUs}
             </h4>
             <div className="mb-6 flex gap-4">
               <a
@@ -126,7 +118,7 @@ export function Footer() {
               </a>
             </div>
             <p className="text-sm text-white/70">
-              Google: 4.4 ★ (58 {locale === 'es' ? 'reseñas' : 'reviews'})
+              Google: 4.4 ★ (58 {t.about.reviews.toLowerCase()})
             </p>
           </div>
         </div>
@@ -137,15 +129,14 @@ export function Footer() {
         <div className="mx-auto max-w-7xl px-6 py-6 sm:px-8 lg:px-[100px]">
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
             <p className="text-sm text-white/40">
-              © {currentYear} Titoté Local Food & Fusion.{' '}
-              {locale === 'es' ? 'Todos los derechos reservados.' : 'All rights reserved.'}
+              © {currentYear} Titoté Local Food & Fusion. {t.footer.rights}.
             </p>
             <div className="flex gap-6">
               <a href="#" className="text-sm text-white/40 transition-colors hover:text-white/70">
-                {locale === 'es' ? 'Política de Privacidad' : 'Privacy Policy'}
+                {t.footer.privacy}
               </a>
               <a href="#" className="text-sm text-white/40 transition-colors hover:text-white/70">
-                {locale === 'es' ? 'Términos y Condiciones' : 'Terms & Conditions'}
+                {t.footer.terms}
               </a>
             </div>
           </div>

@@ -9,9 +9,9 @@ export function About() {
   const [sectionRef, isInView] = useInView<HTMLElement>({ threshold: 0.1 });
 
   return (
-    <section id="nosotros" ref={sectionRef} className="bg-titote-cream py-[100px]">
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-[100px]">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+    <section id="nosotros" ref={sectionRef} className="bg-titote-cream py-12 md:py-[100px]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-[100px]">
+        <div className="grid items-center gap-8 md:gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Image with Ken Burns effect */}
           <div className={`${isInView ? 'animate-reveal-left' : 'opacity-0'}`}>
             <div className="group relative aspect-[4/3] overflow-hidden rounded-3xl shadow-2xl">
@@ -45,7 +45,7 @@ export function About() {
           >
             {/* Badge */}
             <span className="text-titote-gold mb-6 block text-sm font-semibold tracking-[3px] uppercase">
-              {locale === 'es' ? 'NUESTRA HISTORIA' : 'OUR STORY'}
+              {t.about.label}
             </span>
 
             {/* Decorative line with gradient */}
@@ -53,19 +53,9 @@ export function About() {
 
             {/* Title */}
             <h2 className="text-titote-red-dark mb-6 font-serif text-[36px] leading-tight font-bold lg:text-[42px]">
-              {locale === 'es' ? (
-                <>
-                  Donde el Caribe
-                  <br />
-                  se encuentra con <span className="text-shimmer">Oriente</span>
-                </>
-              ) : (
-                <>
-                  Where the Caribbean
-                  <br />
-                  meets the <span className="text-shimmer">Orient</span>
-                </>
-              )}
+              {t.about.whereCaribbean}
+              <br />
+              {t.about.meetsOrient} <span className="text-shimmer">{t.about.orient}</span>
             </h2>
 
             {/* Description */}
@@ -90,9 +80,7 @@ export function About() {
                 <p className="text-titote-gold font-serif text-[36px] font-bold drop-shadow-sm lg:text-[44px]">
                   58
                 </p>
-                <p className="text-titote-brown/60 mt-1 text-sm">
-                  {locale === 'es' ? 'Reseñas' : 'Reviews'}
-                </p>
+                <p className="text-titote-brown/60 mt-1 text-sm">{t.about.reviews}</p>
               </div>
 
               {/* Stat 3 */}
@@ -100,9 +88,7 @@ export function About() {
                 <p className="text-titote-gold font-serif text-[36px] font-bold drop-shadow-sm lg:text-[44px]">
                   5+
                 </p>
-                <p className="text-titote-brown/60 mt-1 text-sm">
-                  {locale === 'es' ? 'Años' : 'Years'}
-                </p>
+                <p className="text-titote-brown/60 mt-1 text-sm">{t.about.years}</p>
               </div>
             </div>
           </div>

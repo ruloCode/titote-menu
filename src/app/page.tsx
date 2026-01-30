@@ -1,6 +1,5 @@
 'use client';
 
-import { LanguageProvider } from '@/context/language-context';
 import {
   Header,
   Hero,
@@ -15,7 +14,7 @@ import {
 
 export default function Home() {
   return (
-    <LanguageProvider>
+    <>
       <Header />
       <main>
         <Hero />
@@ -27,6 +26,6 @@ export default function Home() {
       </main>
       <Footer />
       <WhatsAppButton />
-    </LanguageProvider>
+    </>
   );
 }

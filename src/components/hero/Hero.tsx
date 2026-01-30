@@ -1,43 +1,28 @@
 'use client';
 
-import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import { HeroContent } from './HeroContent';
-
-// Dynamic import for Remotion Player to reduce initial bundle size
-const HeroRemotionPlayer = dynamic(
-  () => import('./HeroRemotionPlayer').then(mod => ({ default: mod.HeroRemotionPlayer })),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="bg-titote-cream/50 h-[400px] w-[320px] animate-pulse rounded-full md:h-[540px] md:w-[500px]" />
-    ),
-  }
-);
 
 export function Hero() {
   return (
-    <section
-      id="inicio"
-      className="bg-titote-cream relative flex min-h-[750px] items-center overflow-hidden"
-    >
-      {/* Subtle background elements */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="bg-titote-gold/5 absolute top-0 left-0 h-[400px] w-[400px] -translate-x-1/3 -translate-y-1/3 rounded-full blur-3xl" />
-        <div className="bg-titote-red/5 absolute right-0 bottom-0 h-[300px] w-[300px] translate-x-1/4 translate-y-1/4 rounded-full blur-3xl" />
-      </div>
+    <section id="inicio" className="relative flex min-h-screen items-center overflow-hidden">
+      {/* Background Image */}
+      <Image
+        src="/images/hero-clean.png"
+        alt="Casa Migueli - Getsemaní, Cartagena"
+        fill
+        priority
+        className="object-cover object-center"
+        sizes="100vw"
+      />
+
+      {/* Overlay for better text readability - vertical gradient on mobile, lateral on desktop */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/30 md:bg-gradient-to-r md:from-black/60 md:via-black/40 md:to-transparent" />
 
       {/* Main content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 pt-32 sm:px-8 lg:px-[100px]">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Left column - Text content */}
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-12 pt-24 sm:px-8 md:py-20 md:pt-32 lg:px-[100px]">
+        <div className="max-w-2xl">
           <HeroContent />
-
-          {/* Right column - Remotion animated plates */}
-          <div className="relative flex justify-center lg:justify-end">
-            <div className="relative h-[400px] w-[320px] md:h-[540px] md:w-[500px]">
-              <HeroRemotionPlayer className="absolute inset-0 h-full w-full" />
-            </div>
-          </div>
         </div>
       </div>
     </section>

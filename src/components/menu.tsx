@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { useLanguage } from '@/context/language-context';
 import { menuData, formatPrice } from '@/lib/menu-data';
 import { SectionHeader } from './ui/section-header';
@@ -9,7 +10,6 @@ import { useInView } from '@/hooks/use-in-view';
 import {
   CevicheIllustration,
   ArrozCocoIllustration,
-  LangostinosIllustration,
   SushiRollIllustration,
   PataconIllustration,
   PostreTropicalIllustration,
@@ -177,7 +177,11 @@ export function Menu() {
   const IllustrationComponent = categoryIllustrationMap[activeCategory] || EntradaIllustration;
 
   return (
-    <section id="menu" ref={sectionRef} className="relative overflow-hidden bg-white py-24">
+    <section
+      id="menu"
+      ref={sectionRef}
+      className="relative overflow-hidden bg-white py-10 md:py-24"
+    >
       {/* Background decoration */}
       <div className="from-titote-cream/60 pointer-events-none absolute top-0 right-0 h-[500px] w-[500px] translate-x-1/3 -translate-y-1/2 rounded-full bg-gradient-to-bl to-transparent" />
       <div className="from-titote-gold/5 pointer-events-none absolute bottom-0 left-0 h-[400px] w-[400px] -translate-x-1/3 translate-y-1/2 rounded-full bg-gradient-to-tr to-transparent" />
@@ -189,12 +193,12 @@ export function Menu() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div
-          className={`mb-16 transition-all duration-700 ${
+          className={`mb-8 transition-all duration-700 md:mb-16 ${
             isInView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           }`}
         >
           <SectionHeader
-            eyebrow={locale === 'es' ? 'Sabores del Caribe' : 'Caribbean Flavors'}
+            eyebrow={t.menu.eyebrow}
             title={
               locale === 'es' ? (
                 <>
@@ -210,9 +214,9 @@ export function Menu() {
           />
         </div>
 
-        {/* Category Tabs - Premium SVG icons */}
+        {/* Category Tabs - Premium SVG icons - Hidden on mobile */}
         <div
-          className={`mb-14 flex flex-wrap justify-center gap-3 transition-all delay-100 duration-700 ${
+          className={`mb-8 hidden flex-wrap justify-center gap-3 transition-all delay-100 duration-700 md:mb-14 md:flex ${
             isInView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           }`}
         >
@@ -293,18 +297,18 @@ export function Menu() {
                     {item.name[locale]}
                   </h3>
                   <p className="text-titote-brown/60 mb-5 line-clamp-2 text-sm leading-relaxed">
-                    {item.description[locale]}
+                    {item.description?.[locale] || ''}
                   </p>
 
                   {/* Price - Display typography */}
                   <div className="flex items-center justify-center gap-3">
                     <span className="text-display-xs text-gradient-gold font-bold">
-                      {formatPrice(item.price)}
+                      {item.price ? formatPrice(item.price) : ''}
                     </span>
                     {item.vegetarian && (
                       <span
                         className="flex h-7 w-7 items-center justify-center rounded-full bg-green-100"
-                        title="Vegetariano"
+                        title={t.menu.badges.vegetarian}
                       >
                         <svg
                           className="h-4 w-4 text-green-600"
@@ -324,14 +328,12 @@ export function Menu() {
 
         {/* View Full Menu CTA */}
         <div
-          className={`mt-16 text-center transition-all delay-500 duration-700 ${
+          className={`mt-10 text-center transition-all delay-500 duration-700 md:mt-16 ${
             isInView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           }`}
         >
-          <a
-            href="https://titotelocalfoodandfusion.netlify.app/"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/menu"
             className="group border-titote-gold/50 text-titote-gold hover:bg-titote-gold hover:border-titote-gold inline-flex items-center gap-3 rounded-full border-2 bg-white/50 px-10 py-5 text-lg font-semibold backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:text-white hover:shadow-xl"
           >
             {t.menu.viewFull}
@@ -345,10 +347,10 @@ export function Menu() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
               />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

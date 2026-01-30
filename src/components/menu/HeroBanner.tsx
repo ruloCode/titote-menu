@@ -7,7 +7,7 @@ interface HeroBannerProps {
   heroImage?: string;
 }
 
-export function HeroBanner({ heroImage = '/images/menu/hero.png' }: HeroBannerProps) {
+export function HeroBanner({ heroImage = '/images/hero-clean.png' }: HeroBannerProps) {
   const { t, locale, toggleLocale } = useLanguage();
 
   return (

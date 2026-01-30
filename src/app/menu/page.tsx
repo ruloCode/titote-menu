@@ -57,7 +57,7 @@ export default function MenuPage() {
       <MenuHeader searchQuery={searchQuery} onSearchChange={handleSearchChange} />
 
       {/* Hero Banner */}
-      <HeroBanner heroImage="/images/menu/hero-facade.png" />
+      <HeroBanner />
 
       {/* Category Navigation */}
       {(!isSearching || hasResults) && (
@@ -69,7 +69,7 @@ export default function MenuPage() {
       )}
 
       {/* Main Content */}
-      <main className="mx-auto max-w-7xl px-6 pt-6 sm:px-8 lg:px-[100px]">
+      <main className="mx-auto max-w-7xl px-4 pt-6 sm:px-8 lg:px-[100px]">
         {hasResults ? (
           <>
             {/* Search Results Count */}

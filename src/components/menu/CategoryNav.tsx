@@ -81,7 +81,7 @@ export function CategoryNav({ categories, activeCategory, onCategoryClick }: Cat
 
   return (
     <div className="glass-category-nav sticky top-[60px] z-40">
-      <div className="relative mx-auto max-w-7xl px-6 sm:px-8 lg:px-[100px]">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-8 lg:px-[100px]">
         {/* Left arrow button - desktop only */}
         {showLeftShadow && (
           <button
